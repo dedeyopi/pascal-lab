@@ -124,6 +124,9 @@ function StudentApp() {
             onReviewReflection={() => setView('reflection')}
           />
         )}
+        {view === 'certificate' && (
+  <CertificateScreen onBack={() => setView('result')} />
+)}
       </main>
 
       <footer className="border-t border-white/12 bg-navy-950/40 px-4 py-8 text-center backdrop-blur-sm sm:px-6">
