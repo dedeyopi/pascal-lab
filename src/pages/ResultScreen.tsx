@@ -17,9 +17,10 @@ const CONCEPTS = [
 interface Props {
   onBackToMap: () => void;
   onReviewReflection: () => void;
+  onOpenCertificate: () => void;
 }
 
-export function ResultScreen({ onBackToMap, onReviewReflection }: Props) {
+export function ResultScreen({ onBackToMap, onReviewReflection, onOpenCertificate }: Props)  {
   const { state, resetAll } = useLab();
 
   const earnedBadges = BADGE_LIST.filter((b) => state.badges.includes(b.id));
@@ -146,28 +147,31 @@ export function ResultScreen({ onBackToMap, onReviewReflection }: Props) {
       )}
 
       <div className="flex flex-col gap-3 sm:flex-row">
-        <button type="button" className="btn-primary flex-1" onClick={onBackToMap}>
-          🗺️ KEMBALI KE PETA MISI
-        </button>
-        <button type="button" className="btn-ghost flex-1" onClick={onReviewReflection}>
-          📝 LIHAT REFLEKSI
-        </button>
         <button
-          type="button"
-          className="btn-quiet"
-          onClick={() => {
-            if (window.confirm('Hapus seluruh kemajuan dan mulai dari awal?')) {
-              resetAll();
-              window.location.reload();
-            }
-          }}
-        >
-          Mulai Ulang
-        </button>
-      </div>
-    </div>
-  );
-}
+  type="button"
+  className="btn-primary flex-1 !bg-gradient-to-r !from-amber-400 !to-yellow-500 !text-amber-950"
+  onClick={onOpenCertificate}
+>
+  🎓 LIHAT SERTIFIKAT
+</button>
+<button type="button" className="btn-ghost flex-1" onClick={onBackToMap}>
+  🗺️ KEMBALI KE PETA MISI
+</button>
+<button type="button" className="btn-ghost flex-1" onClick={onReviewReflection}>
+  📝 LIHAT REFLEKSI
+</button>
+<button
+  type="button"
+  className="btn-quiet"
+  onClick={() => {
+    if (window.confirm('Hapus seluruh kemajuan dan mulai dari awal?')) {
+      resetAll();
+      window.location.reload();
+    }
+  }}
+>
+  Mulai Ulang
+</button>
 
 function buildSummary(
   answers: { category: string; correct: boolean }[],
