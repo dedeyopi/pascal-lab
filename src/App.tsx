@@ -118,12 +118,13 @@ function StudentApp() {
           />
         )}
 
-        {view === 'result' && (
-          <ResultScreen
-            onBackToMap={goToMap}
-            onReviewReflection={() => setView('reflection')}
-          />
-        )}
+       {view === 'result' && (
+  <ResultScreen
+    onBackToMap={goToMap}
+    onReviewReflection={() => setView('reflection')}
+    onOpenCertificate={() => setView('certificate')}
+  />
+)}
         {view === 'certificate' && (
   <CertificateScreen onBack={() => setView('result')} />
 )}
