@@ -6,6 +6,7 @@ import { ProfileGate } from './components/ProfileGate';
 import { MissionMap } from './components/MissionMap';
 import { ReflectionForm } from './components/ReflectionForm';
 import { ResultScreen } from './pages/ResultScreen';
+import { CertificateScreen } from './pages/CertificateScreen';
 import { TeacherDashboard } from './pages/TeacherDashboard';
 
 import { Mission01 } from './missions/Mission01';
