@@ -1,4 +1,3 @@
-// src/pages/ResultScreen.tsx
 import { useLab } from '../state/LabContext';
 import { BADGE_LIST } from '../data/badges';
 import { BadgeCard } from '../components/BadgeCard';
@@ -20,12 +19,17 @@ interface Props {
   onOpenCertificate: () => void;
 }
 
-export function ResultScreen({ onBackToMap, onReviewReflection, onOpenCertificate }: Props)  {
+export function ResultScreen({
+  onBackToMap,
+  onReviewReflection,
+  onOpenCertificate,
+}: Props) {
   const { state, resetAll } = useLab();
 
   const earnedBadges = BADGE_LIST.filter((b) => state.badges.includes(b.id));
   const totalPossible = QUIZ.length;
-  const pct = totalPossible > 0 ? Math.round((state.quizScore / totalPossible) * 100) : 0;
+  const pct =
+    totalPossible > 0 ? Math.round((state.quizScore / totalPossible) * 100) : 0;
 
   const summary = buildSummary(state.quizAnswers, pct, state.reflection.confidence);
 
@@ -35,7 +39,9 @@ export function ResultScreen({ onBackToMap, onReviewReflection, onOpenCertificat
         <span className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-electric via-aqua to-grape text-3xl">
           🏆
         </span>
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-aqua">Sertifikat Digital</p>
+        <p className="font-mono text-xs font-bold uppercase tracking-[0.3em] text-aqua">
+          Sertifikat Digital
+        </p>
         <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
           PASCAL LAB COMPLETE
         </h1>
@@ -53,8 +59,12 @@ export function ResultScreen({ onBackToMap, onReviewReflection, onOpenCertificat
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-aqua">
               Science Investigator
             </p>
-            <p className="text-xl font-extrabold text-white">{state.student?.name ?? 'Investigator'}</p>
-            <p className="text-sm text-slate-400">Kelas {state.student?.className ?? '—'}</p>
+            <p className="text-xl font-extrabold text-white">
+              {state.student?.name ?? 'Investigator'}
+            </p>
+            <p className="text-sm text-slate-400">
+              Kelas {state.student?.className ?? '—'}
+            </p>
           </div>
         </div>
 
@@ -66,12 +76,21 @@ export function ResultScreen({ onBackToMap, onReviewReflection, onOpenCertificat
               v: 'Misi Selesai',
               tone: 'text-electric-light',
             },
-            { k: `${earnedBadges.length}/${BADGE_LIST.length}`, v: 'Lencana', tone: 'text-grape-light' },
+            {
+              k: `${earnedBadges.length}/${BADGE_LIST.length}`,
+              v: 'Lencana',
+              tone: 'text-grape-light',
+            },
             { k: `${pct}%`, v: 'Skor Challenge', tone: 'text-emerald-400' },
           ].map((s) => (
-            <div key={s.v} className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3 text-center">
+            <div
+              key={s.v}
+              className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-3 text-center"
+            >
               <dd className={`font-mono text-xl font-extrabold ${s.tone}`}>{s.k}</dd>
-              <dt className="mt-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-500">{s.v}</dt>
+              <dt className="mt-0.5 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                {s.v}
+              </dt>
             </div>
           ))}
         </dl>
@@ -118,7 +137,13 @@ export function ResultScreen({ onBackToMap, onReviewReflection, onOpenCertificat
               >
                 {state.completedMissions.includes(m.id) ? '✓' : '–'}
               </span>
-              <span className={state.completedMissions.includes(m.id) ? 'text-slate-200' : 'text-slate-500'}>
+              <span
+                className={
+                  state.completedMissions.includes(m.id)
+                    ? 'text-slate-200'
+                    : 'text-slate-500'
+                }
+              >
                 Misi {m.code} — {m.title}
               </span>
             </div>
@@ -140,38 +165,50 @@ export function ResultScreen({ onBackToMap, onReviewReflection, onOpenCertificat
             }
           </p>
           <p className="mt-2 text-xs leading-relaxed text-slate-500">
-            Jika kamu masih merasa bingung, tidak apa-apa. Diskusikan bagian yang paling sulit dengan gurumu
-            — rasa ingin tahu adalah bahan bakar seorang ilmuwan.
+            Jika kamu masih merasa bingung, tidak apa-apa. Diskusikan bagian yang paling sulit
+            dengan gurumu — rasa ingin tahu adalah bahan bakar seorang ilmuwan.
           </p>
         </section>
       )}
 
       <div className="flex flex-col gap-3 sm:flex-row">
         <button
-  type="button"
-  className="btn-primary flex-1 !bg-gradient-to-r !from-amber-400 !to-yellow-500 !text-amber-950"
-  onClick={onOpenCertificate}
->
-  🎓 LIHAT SERTIFIKAT
-</button>
-<button type="button" className="btn-ghost flex-1" onClick={onBackToMap}>
-  🗺️ KEMBALI KE PETA MISI
-</button>
-<button type="button" className="btn-ghost flex-1" onClick={onReviewReflection}>
-  📝 LIHAT REFLEKSI
-</button>
-<button
-  type="button"
-  className="btn-quiet"
-  onClick={() => {
-    if (window.confirm('Hapus seluruh kemajuan dan mulai dari awal?')) {
-      resetAll();
-      window.location.reload();
-    }
-  }}
->
-  Mulai Ulang
-</button>
+          type="button"
+          className="btn-primary flex-1 !bg-gradient-to-r !from-amber-400 !to-yellow-500 !text-amber-950"
+          onClick={onOpenCertificate}
+        >
+          🎓 LIHAT SERTIFIKAT
+        </button>
+        <button
+          type="button"
+          className="btn-ghost flex-1"
+          onClick={onBackToMap}
+        >
+          🗺️ KEMBALI KE PETA MISI
+        </button>
+        <button
+          type="button"
+          className="btn-ghost flex-1"
+          onClick={onReviewReflection}
+        >
+          📝 LIHAT REFLEKSI
+        </button>
+        <button
+          type="button"
+          className="btn-quiet"
+          onClick={() => {
+            if (window.confirm('Hapus seluruh kemajuan dan mulai dari awal?')) {
+              resetAll();
+              window.location.reload();
+            }
+          }}
+        >
+          Mulai Ulang
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function buildSummary(
   answers: { category: string; correct: boolean }[],
@@ -202,22 +239,53 @@ function buildSummary(
         : 'Kamu sudah melewati seluruh investigasi. Beberapa konsep masih perlu diperkuat lagi.'
   );
 
-  if (konsep >= 80) parts.push('Pemahaman konsepmu sangat baik: kamu mampu membedakan tekanan, gaya, dan luas penampang.');
-  else if (konsep >= 50) parts.push('Pemahaman konsepmu cukup baik, tetapi masih ada bagian yang perlu diperjelas.');
-  else parts.push('Perkuat kembali konsep dasar: tekanan bergantung pada gaya dan luas, dan tekanan diteruskan sama besar.');
+  if (konsep >= 80)
+    parts.push(
+      'Pemahaman konsepmu sangat baik: kamu mampu membedakan tekanan, gaya, dan luas penampang.'
+    );
+  else if (konsep >= 50)
+    parts.push(
+      'Pemahaman konsepmu cukup baik, tetapi masih ada bagian yang perlu diperjelas.'
+    );
+  else
+    parts.push(
+      'Perkuat kembali konsep dasar: tekanan bergantung pada gaya dan luas, dan tekanan diteruskan sama besar.'
+    );
 
-  if (hitung >= 80) parts.push('Keterampilan hitunganmu akurat — kamu mampu menerapkan F₁/A₁ = F₂/A₂ dengan tepat.');
-  else if (hitung >= 50) parts.push('Hitunganmu sudah cukup baik; periksa kembali konsistensi satuan luas.');
-  else parts.push('Latih lagi perhitungan dengan memastikan satuan luas konsisten sebelum membandingkan.');
+  if (hitung >= 80)
+    parts.push(
+      'Keterampilan hitunganmu akurat — kamu mampu menerapkan F₁/A₁ = F₂/A₂ dengan tepat.'
+    );
+  else if (hitung >= 50)
+    parts.push(
+      'Hitunganmu sudah cukup baik; periksa kembali konsistensi satuan luas.'
+    );
+  else
+    parts.push(
+      'Latih lagi perhitungan dengan memastikan satuan luas konsisten sebelum membandingkan.'
+    );
 
-  if (penalaran >= 80) parts.push('Penalaranmu tajam: kamu dapat menjelaskan mengapa gaya membesar tanpa mengklaim tekanan ikut membesar.');
-  else if (penalaran >= 50) parts.push('Penalaranmu berkembang baik; pertajam dengan selalu menyebut peran luas penampang.');
-  else parts.push('Pada bagian penalaran, ingat bahwa gaya keluaran membesar karena luasnya, bukan karena tekanannya.');
+  if (penalaran >= 80)
+    parts.push(
+      'Penalaranmu tajam: kamu dapat menjelaskan mengapa gaya membesar tanpa mengklaim tekanan ikut membesar.'
+    );
+  else if (penalaran >= 50)
+    parts.push(
+      'Penalaranmu berkembang baik; pertajam dengan selalu menyebut peran luas penampang.'
+    );
+  else
+    parts.push(
+      'Pada bagian penalaran, ingat bahwa gaya keluaran membesar karena luasnya, bukan karena tekanannya.'
+    );
 
   if (confidence === 'sangat' || confidence === 'memahami') {
-    parts.push('Kamu juga merasa yakin dengan pemahamanmu — pertahankan rasa ingin tahu ini.');
+    parts.push(
+      'Kamu juga merasa yakin dengan pemahamanmu — pertahankan rasa ingin tahu ini.'
+    );
   } else if (confidence) {
-    parts.push('Kamu masih merasa belum sepenuhnya yakin. Cobalah mengulang Misi 03 dan 04 untuk memperkuat pemahaman.');
+    parts.push(
+      'Kamu masih merasa belum sepenuhnya yakin. Cobalah mengulang Misi 03 dan 04 untuk memperkuat pemahaman.'
+    );
   }
 
   return parts.join(' ');
