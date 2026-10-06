@@ -173,3 +173,46 @@ input[type='range']:focus-visible {
     animation: none;
   }
 }
+      /* ===== Print styles untuk Sertifikat ===== */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 8mm;
+  }
+
+  html,
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Sembunyikan semua elemen */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Tampilkan hanya area sertifikat */
+  .certificate-print,
+  .certificate-print * {
+    visibility: visible;
+  }
+
+  /* Reposisikan sertifikat di kiri atas */
+  .certificate-print {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  /* Sembunyikan toolbar & elemen navigasi */
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
