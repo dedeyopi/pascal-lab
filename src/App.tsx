@@ -17,7 +17,7 @@ import { Mission05 } from './missions/Mission05';
 import { Mission06 } from './missions/Mission06';
 import { Mission07 } from './missions/Mission07';
 
-type View = 'hero' | 'profile' | 'map' | 'mission' | 'reflection' | 'result';
+type View = 'hero' | 'profile' | 'map' | 'mission' | 'reflection' | 'result' | 'certificate';
 
 export default function App() {
   const isTeacher =
